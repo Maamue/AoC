@@ -7,9 +7,16 @@ foreach ($change in $sonar) {
             $movement = [int]($change -replace '[^0-9]', '')
             $horizontal += $movement 
             $depth += $aim * $movement
+            break
         }
-        '^d' { $aim += [int]($change -replace '[^0-9]', '') }
-        '^u' { $aim -= [int]($change -replace '[^0-9]', '') }
+        '^d' {
+            $aim += [int]($change -replace '[^0-9]', '') 
+            break
+        }
+        '^u' { 
+            $aim -= [int]($change -replace '[^0-9]', '') 
+            break
+        }
     }
 }
 $sum = $depth * $horizontal
