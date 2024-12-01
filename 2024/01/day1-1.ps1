@@ -1,6 +1,8 @@
 # https://adventofcode.com/2024/day/1 
 using namespace System.Collections.Generic
 
+$starttime = Get-Date
+
 # switch between inputs
 $test = $false
 if ($test) {
@@ -29,4 +31,12 @@ $sum = 0
 for ($i = 0; $i -lt $length; $i++) {
    $sum += [Math]::Abs($right[$i] - $left[$i])
 }
+
+$endtime = Get-Date
+if ($(($endtime-$starttime).TotalSeconds) -lt 1) {
+    Write-Host "Duration: $(($endtime-$starttime).TotalMilliseconds) milliseconds"
+} else {
+    Write-Host "Duration: $(($endtime-$starttime).TotalSeconds) Seconds"
+}
 $sum
+

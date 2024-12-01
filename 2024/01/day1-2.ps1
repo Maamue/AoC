@@ -1,5 +1,6 @@
 using namespace System.Collections.Generic
 
+$starttime = Get-Date
 # switch between inputs
 $test = $false
 if ($test) {
@@ -45,4 +46,10 @@ foreach ($leftNumber in $left) {
 }
 
 # $leftInRightCounts
+$endtime = Get-Date
+if ($(($endtime-$starttime).TotalSeconds) -lt 1) {
+    Write-Host "Duration: $(($endtime-$starttime).TotalMilliseconds) milliseconds"
+} else {
+    Write-Host "Duration: $(($endtime-$starttime).TotalSeconds) Seconds"
+}
 $sum
