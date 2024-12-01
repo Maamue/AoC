@@ -28,7 +28,7 @@ switch -Regex -File $inputfile  {
 $right.Sort()
 $left.Sort()
 $sum = 0
-for ($i = 0; $i -lt $length; $i++) {
+for ($i = 0; $i -lt $count; $i++) {
    $sum += [Math]::Abs($right[$i] - $left[$i])
 }
 
