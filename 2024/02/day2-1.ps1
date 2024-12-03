@@ -1,6 +1,7 @@
 $starttime = Get-Date
 $safereports = 0
-# switch between inputs
+
+# Switch between inputs
 $test = $false
 if ($test) {
     $inputfile = '.\exampleinput.txt'
@@ -25,10 +26,9 @@ function Get-Order {
             continue # Skip if consecutive numbers are the same
         }
 
-        # return 0 (unordered)
         if (($ascending -and ($numbers[$i] -lt $numbers[$i - 1])) -or
             (-not $ascending -and ($numbers[$i] -gt $numbers[$i - 1]))) {
-            return 0
+            return 0 # Unordered
         }
     }
 
@@ -45,16 +45,15 @@ function Get-LevelDifference {
         [int[]]$numbers
     )
 
-    # Loop through the numbers, checking adjacent differences
     for ($i = 1; $i -lt $numbers.Count; $i++) {
         # If any difference is greater than 3, the report is not safe
-        if ([Math]::Abs($numbers[$i] - $numbers[$i - 1]) -gt 3) {
+        $abs = [Math]::Abs($numbers[$i] - $numbers[$i - 1])
+        if ($abs -gt 3 -or $abs -eq 0) {
             return $false
         }
     }
 
-    # If the loop completes and all differences are within 3, the report is safe
-    return $true
+    return $true # Conditions met to be safe
 }
 
 
@@ -68,14 +67,14 @@ $collection | ForEach-Object {
     switch ($result) {
         1 { 
             Write-Output "Ascending: $line"
-            if (-not (Get-LevelDifference -numbers $numbers)) {
+            if ((Get-LevelDifference -numbers $numbers)) {
                 Write-Host "Report $line is safe. Adding to total"
                 ++$safereports
             } 
         }
         -1 {
             Write-Output "Descending: $line" 
-            if (-not (Get-LevelDifference -numbers $numbers)) {
+            if ((Get-LevelDifference -numbers $numbers)) {
                 Write-Host "Report $line is safe. Adding to total"
                 ++$safereports
             } 
@@ -92,13 +91,3 @@ else {
     Write-Host "Duration: $(($endtime-$starttime).TotalSeconds) Seconds"
 }
 $safereports
-
-
-# $collection | Foreach-Object -ThrottleLimit 32 -Parallel {
-#   Write-Host "$_ in Thread $([System.Threading.Thread]::CurrentThread.ManagedThreadId)" 
-# }
-
-# 1..20 | ForEach-Object -parallel { 
-#     Write-host "Objekt #$_ in Thread $([System.Threading.Thread]::CurrentThread.ManagedThreadId)" 
-#     sleep -Seconds 2 } -ThrottleLimit 5 
-

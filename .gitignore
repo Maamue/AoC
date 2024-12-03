@@ -2,3 +2,8 @@
 Get-PuzzleInput.ps1
 .vscode/
 *.txt
+2024/01/MyConsoleApp/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+2024/01/MyConsoleApp/obj/Debug/net9.0/MyConsoleApp.AssemblyInfo.cs
+2024/01/MyConsoleApp/obj/Debug/net9.0/MyConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+2024/01/MyConsoleApp/obj/Debug/net9.0/MyConsoleApp.AssemblyInfoInputs.cache
+2024/01/MyConsoleApp/obj/Debug/net9.0/MyConsoleApp.GlobalUsings.g.cs
